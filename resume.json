@@ -1,0 +1,181 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "meta": {
+    "version": "v1.0.0",
+    "canonical": "https://example.com/resume.json",
+    "lastModified": "2026-04-19T00:00:00Z",
+    "language": "en"
+  },
+  "basics": {
+    "name": "River Chen",
+    "label": "Staff Software Engineer",
+    "email": "river@example.com",
+    "phone": "+1-555-0100",
+    "url": "https://example.com/river",
+    "summary": "Backend engineer with a decade of experience building observable, well-tested distributed systems in Rust and Go. Happiest at the intersection of platform reliability, developer ergonomics, and thoughtful documentation.",
+    "location": {
+      "address": "123 Example Street",
+      "postalCode": "94000",
+      "city": "San Francisco",
+      "region": "CA",
+      "countryCode": "US"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "riverchen",
+        "url": "https://github.example.com/riverchen"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "riverchen",
+        "url": "https://linkedin.example.com/in/riverchen"
+      },
+      {
+        "network": "Mastodon",
+        "username": "@river",
+        "url": "https://social.example.com/@river"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Meridian Systems",
+      "position": "Staff Software Engineer",
+      "url": "https://meridian.example.com",
+      "startDate": "2022-03-01",
+      "summary": "Tech lead for the data ingestion platform processing 2B events/day. Owned the roadmap, on-call rotation, and cross-team coordination with analytics, ML, and product teams.",
+      "highlights": [
+        "Cut p99 ingest latency from 4.2s to 380ms by redesigning the batching layer in Rust",
+        "Introduced a property-based test suite that caught three pre-production regressions in the first month",
+        "Mentored four engineers, two of whom were promoted within the year"
+      ]
+    },
+    {
+      "name": "Northwind Analytics",
+      "position": "Senior Software Engineer",
+      "url": "https://northwind.example.com",
+      "startDate": "2018-06-01",
+      "endDate": "2022-02-28",
+      "summary": "Built and operated the customer-facing query API serving 500+ enterprise tenants.",
+      "highlights": [
+        "Led the Go-to-Rust migration of the query planner, reducing memory footprint by 60%",
+        "Designed the multi-tenant rate-limiting system still in production today",
+        "Authored the on-call runbook and ran the first internal chaos-engineering day"
+      ]
+    },
+    {
+      "name": "Lumen Labs",
+      "position": "Software Engineer",
+      "url": "https://lumen.example.com",
+      "startDate": "2015-08-01",
+      "endDate": "2018-05-31",
+      "summary": "Full-stack engineer on a small team building observability tools for microservice deployments.",
+      "highlights": [
+        "Shipped the v1 alerting pipeline from prototype to GA in nine months",
+        "Built the Kubernetes operator that replaced the team's hand-rolled deploy scripts"
+      ]
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "Local Code Club",
+      "position": "Volunteer Mentor",
+      "url": "https://codeclub.example.com",
+      "startDate": "2019-09-01",
+      "summary": "Weekly mentoring sessions for middle-schoolers learning Python and Scratch."
+    }
+  ],
+  "education": [
+    {
+      "institution": "State University",
+      "url": "https://stateuniversity.example.com",
+      "area": "Computer Science",
+      "studyType": "Bachelor of Science",
+      "startDate": "2011-09-01",
+      "endDate": "2015-05-31",
+      "score": "3.8",
+      "courses": [
+        "CS301 — Distributed Systems",
+        "CS410 — Programming Languages",
+        "CS450 — Compilers"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "title": "Engineering Excellence Award",
+      "date": "2023-11-01",
+      "awarder": "Meridian Systems",
+      "summary": "Annual internal recognition for sustained technical and cultural impact across the engineering org."
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Certified Kubernetes Administrator",
+      "date": "2020-05-01",
+      "issuer": "Cloud Native Computing Foundation",
+      "url": "https://example.com/cka"
+    }
+  ],
+  "publications": [
+    {
+      "name": "Designing for the Boring Middle",
+      "publisher": "Example Engineering Blog",
+      "releaseDate": "2024-02-14",
+      "url": "https://blog.example.com/boring-middle",
+      "summary": "Essay arguing that most production systems fail in the unremarkable middle of their lifecycle, not at launch or sunset."
+    }
+  ],
+  "skills": [
+    {
+      "name": "Languages",
+      "level": "Advanced",
+      "keywords": ["Rust", "Go", "Python", "TypeScript", "SQL"]
+    },
+    {
+      "name": "Infrastructure",
+      "level": "Advanced",
+      "keywords": ["Kubernetes", "Terraform", "PostgreSQL", "Kafka", "Prometheus"]
+    },
+    {
+      "name": "Practices",
+      "level": "Advanced",
+      "keywords": ["Distributed systems", "Observability", "Code review", "Incident response", "Mentoring"]
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Native speaker"
+    },
+    {
+      "language": "Mandarin",
+      "fluency": "Conversational"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Open Source",
+      "keywords": ["Rust tooling", "Documentation"]
+    },
+    {
+      "name": "Typography",
+      "keywords": ["Typst", "Small-press books"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "chrono-drift",
+      "description": "Small Rust library for detecting clock-drift anomalies in distributed trace data.",
+      "startDate": "2023-01-01",
+      "endDate": "2023-06-30",
+      "url": "https://github.example.com/riverchen/chrono-drift",
+      "highlights": [
+        "Ships as a single crate with zero runtime dependencies",
+        "Used in production at two example-domain companies"
+      ],
+      "keywords": ["Rust", "Observability", "Tracing"]
+    }
+  ]
+}

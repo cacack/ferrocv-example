@@ -1,0 +1,8 @@
+dist/
+*.pdf
+
+# Editor scratch
+.vscode/
+.idea/
+*.swp
+.DS_Store

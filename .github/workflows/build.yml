@@ -1,0 +1,67 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  render:
+    name: render resume
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install ferrocv
+        env:
+          FERROCV_VERSION: v0.2.1
+        run: |
+          set -euo pipefail
+          target=x86_64-unknown-linux-gnu
+          url="https://github.com/cacack/ferrocv/releases/download/${FERROCV_VERSION}/ferrocv-${target}.tar.gz"
+          curl --proto '=https' --tlsv1.2 -fsSL "$url" | tar -xz -C /usr/local/bin ferrocv
+          ferrocv --version
+
+      - name: validate resume.json
+        run: ferrocv validate resume.json
+
+      - name: render with typst-jsonresume-cv
+        run: ferrocv render resume.json --theme typst-jsonresume-cv --output dist/resume-typst-jsonresume-cv.pdf
+
+      - name: render with fantastic-cv
+        run: ferrocv render resume.json --theme fantastic-cv --output dist/resume-fantastic-cv.pdf
+
+      - name: stage pages content
+        run: cp index.html dist/index.html
+
+      - name: upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-pdfs
+          path: dist/*.pdf
+          if-no-files-found: error
+
+      - name: upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    name: deploy to pages
+    needs: render
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
