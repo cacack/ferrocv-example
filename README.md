@@ -45,14 +45,15 @@ ferrocv validate resume.json
 ferrocv render resume.json --theme typst-jsonresume-cv --output dist/resume.pdf
 ```
 
-Available themes today: `typst-jsonresume-cv`, `fantastic-cv`. Run
-`ferrocv render --help` for the full list on your installed version.
+Run `ferrocv render --help` for the list of themes on your installed
+version.
 
-## Picking a theme
+## Adding more themes
 
-The workflow renders both bundled themes so you can compare. Once
-you've picked one, edit `.github/workflows/build.yml` and remove the
-render step for the other theme (and remove it from `index.html`).
+The seed workflow renders a single theme (`typst-jsonresume-cv`, the
+only theme in the pinned `ferrocv` v0.2.1 release). As newer `ferrocv`
+releases add themes, bump the pin and add a matching render step plus
+a link in `index.html`.
 
 ## Bumping `ferrocv`
 
