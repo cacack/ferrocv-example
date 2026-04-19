@@ -7,11 +7,11 @@
     "language": "en"
   },
   "basics": {
-    "name": "River Chen",
+    "name": "Ferris C. Vitae",
     "label": "Staff Software Engineer",
-    "email": "river@example.com",
+    "email": "ferris@example.com",
     "phone": "+1-555-0100",
-    "url": "https://example.com/river",
+    "url": "https://example.com/ferris",
     "summary": "Backend engineer with a decade of experience building observable, well-tested distributed systems in Rust and Go. Happiest at the intersection of platform reliability, developer ergonomics, and thoughtful documentation.",
     "location": {
       "address": "123 Example Street",
@@ -23,18 +23,18 @@
     "profiles": [
       {
         "network": "GitHub",
-        "username": "riverchen",
-        "url": "https://github.example.com/riverchen"
+        "username": "ferriscv",
+        "url": "https://github.example.com/ferriscv"
       },
       {
         "network": "LinkedIn",
-        "username": "riverchen",
-        "url": "https://linkedin.example.com/in/riverchen"
+        "username": "ferriscv",
+        "url": "https://linkedin.example.com/in/ferriscv"
       },
       {
         "network": "Mastodon",
-        "username": "@river",
-        "url": "https://social.example.com/@river"
+        "username": "@ferris",
+        "url": "https://social.example.com/@ferris"
       }
     ]
   },
@@ -148,10 +148,6 @@
     {
       "language": "English",
       "fluency": "Native speaker"
-    },
-    {
-      "language": "Mandarin",
-      "fluency": "Conversational"
     }
   ],
   "interests": [
@@ -170,7 +166,7 @@
       "description": "Small Rust library for detecting clock-drift anomalies in distributed trace data.",
       "startDate": "2023-01-01",
       "endDate": "2023-06-30",
-      "url": "https://github.example.com/riverchen/chrono-drift",
+      "url": "https://github.example.com/ferriscv/chrono-drift",
       "highlights": [
         "Ships as a single crate with zero runtime dependencies",
         "Used in production at two example-domain companies"
