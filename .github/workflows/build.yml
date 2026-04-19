@@ -37,9 +37,6 @@ jobs:
       - name: render with typst-jsonresume-cv
         run: ferrocv render resume.json --theme typst-jsonresume-cv --output dist/resume-typst-jsonresume-cv.pdf
 
-      - name: render with fantastic-cv
-        run: ferrocv render resume.json --theme fantastic-cv --output dist/resume-fantastic-cv.pdf
-
       - name: stage pages content
         run: cp index.html dist/index.html
 
