@@ -10,6 +10,8 @@ name: build
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
     inputs:
       publish_pages:
@@ -26,16 +28,20 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
+env:
+  FERROCV_VERSION: v0.4.0
+
 jobs:
-  render:
-    name: render and release
+  lint:
+    name: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
+      - name: check spelling
+        uses: crate-ci/typos@master
+
       - name: install ferrocv
-        env:
-          FERROCV_VERSION: v0.4.0
         run: |
           set -euo pipefail
           target=x86_64-unknown-linux-gnu
@@ -46,6 +52,29 @@ jobs:
       - name: validate resume.json
         run: ferrocv validate resume.json
 
+      - name: check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --verbose resume.json
+          fail: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  render:
+    name: render
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install ferrocv
+        run: |
+          set -euo pipefail
+          target=x86_64-unknown-linux-gnu
+          url="https://github.com/cacack/ferrocv/releases/download/${FERROCV_VERSION}/ferrocv-${target}.tar.gz"
+          curl --proto '=https' --tlsv1.2 -fsSL "$url" | tar -xz -C /usr/local/bin ferrocv
+          ferrocv --version
+
       - name: render PDF
         run: ferrocv render resume.json --theme typst-jsonresume-cv --output dist/resume.pdf
 
@@ -55,7 +84,15 @@ jobs:
       - name: render plain text
         run: ferrocv render resume.json --format text --output dist/resume.txt
 
+      - name: upload rendered preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-${{ github.sha }}
+          path: dist/resume.*
+          retention-days: 14
+
       - name: publish latest release
+        if: ${{ github.event_name != 'pull_request' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
