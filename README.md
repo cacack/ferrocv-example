@@ -16,7 +16,12 @@ Release.
 - **Output:** `resume.pdf`, `resume.html`, and `resume.txt` attached
   to a `latest` release that is overwritten on every push to `main`.
   Keep the repo private and the release (and its assets) stay private
-  too.
+  too. Every run (including PRs) also uploads the renders as a 14-day
+  workflow artifact (`resume-<sha>`) for preview without publishing.
+- **Checks:** Every push and PR spell-checks with
+  [`typos`](https://github.com/crate-ci/typos), schema-validates via
+  `ferrocv validate`, and link-checks URLs with
+  [`lychee`](https://lychee.cli.rs/) before rendering.
 - **Runtime:** a pinned `ferrocv` binary downloaded from the upstream
   GitHub Release. No Rust toolchain, no Node, no TeX.
 
@@ -32,7 +37,9 @@ with your own.
 2. Edit `resume.json` with your own content. The schema reference lives
    at <https://jsonresume.org/schema/>.
 3. Commit and push to `main`. The `build` workflow validates your
-   resume, renders it, and updates the `latest` release.
+   resume, renders it, and updates the `latest` release. PRs to `main`
+   run the same checks and upload a preview artifact without
+   publishing — handy for reviewing changes before they go live.
 4. Grab your rendered PDF from the repo's **Releases → latest** page.
    The download URL is stable; on a private repo you'll need to be
    signed in to GitHub to fetch it.
@@ -78,10 +85,23 @@ follow the `resume.<format>` convention (`resume.pdf`, `resume.html`,
 ## Bumping `ferrocv`
 
 `ferrocv` is pinned in `.github/workflows/build.yml` via the
-`FERROCV_VERSION` env var. Update it to a newer tag from the
-[ferrocv releases
+workflow-level `FERROCV_VERSION` env var. Update it to a newer tag
+from the [ferrocv releases
 page](https://github.com/cacack/ferrocv/releases), push, and the
 workflow will pick it up.
+
+## Suppressing false positives
+
+The spell- and link-checks will occasionally flag things that aren't
+actually wrong (proper names, rate-limited hosts, intentionally
+internal URLs). Both tools read optional config from the repo root:
+
+- **Typos:** add a `.typos.toml` — see the
+  [typos configuration docs](https://github.com/crate-ci/typos#configuration)
+  for the `[default.extend-words]` escape hatch.
+- **Lychee:** add a `lychee.toml` — see the
+  [lychee configuration docs](https://lychee.cli.rs/usage/config/)
+  for `exclude` patterns and `accept` status codes.
 
 ## License
 
