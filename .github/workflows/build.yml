@@ -106,7 +106,7 @@ jobs:
 
       - name: stage pages content
         if: ${{ inputs.publish_pages == true }}
-        run: cp index.html dist/index.html
+        run: cp .github/pages/index.html dist/index.html
 
       - name: upload pages artifact
         if: ${{ inputs.publish_pages == true }}
