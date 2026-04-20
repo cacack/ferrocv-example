@@ -35,7 +35,7 @@ jobs:
 
       - name: install ferrocv
         env:
-          FERROCV_VERSION: v0.2.1
+          FERROCV_VERSION: v0.4.0
         run: |
           set -euo pipefail
           target=x86_64-unknown-linux-gnu
@@ -48,6 +48,12 @@ jobs:
 
       - name: render PDF
         run: ferrocv render resume.json --theme typst-jsonresume-cv --output dist/resume.pdf
+
+      - name: render HTML
+        run: ferrocv render resume.json --format html --output dist/resume.html
+
+      - name: render plain text
+        run: ferrocv render resume.json --format text --output dist/resume.txt
 
       - name: publish latest release
         env:
