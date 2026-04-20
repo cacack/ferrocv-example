@@ -100,18 +100,18 @@ your voice and the tools you actually use.
 
 The seed workflow renders a PDF with `typst-jsonresume-cv`, plus HTML
 and plain text via the default `text-minimal` theme. Other PDF themes
-(`modern-cv`, `fantastic-cv`) ship with `ferrocv` v0.4.0 — swap the
+(`modern-cv`, `fantastic-cv`) ship with `ferrocv` v0.5.0 — swap the
 `--theme` value or add extra render steps. Output filenames should
 follow the `resume.<format>` convention (`resume.pdf`, `resume.html`,
 `resume.txt`) so they all land cleanly on the `latest` release.
 
 ## Bumping `ferrocv`
 
-`ferrocv` is pinned in `.github/workflows/build.yml` via the
-workflow-level `FERROCV_VERSION` env var. Update it to a newer tag
-from the [ferrocv releases
-page](https://github.com/cacack/ferrocv/releases), push, and the
-workflow will pick it up.
+`ferrocv` is installed via the `cacack/ferrocv/.github/actions/setup-ferrocv`
+composite action. To update, bump both the `@v0.5.0` ref and the
+matching `version:` input in `.github/workflows/build.yml` (four
+places total — two jobs × two lines each) to a newer tag from the
+[ferrocv releases page](https://github.com/cacack/ferrocv/releases).
 
 ## Suppressing false positives
 

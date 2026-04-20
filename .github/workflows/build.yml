@@ -28,9 +28,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
-env:
-  FERROCV_VERSION: v0.4.0
-
 jobs:
   lint:
     name: lint
@@ -41,13 +38,9 @@ jobs:
       - name: check spelling
         uses: crate-ci/typos@master
 
-      - name: install ferrocv
-        run: |
-          set -euo pipefail
-          target=x86_64-unknown-linux-gnu
-          url="https://github.com/cacack/ferrocv/releases/download/${FERROCV_VERSION}/ferrocv-${target}.tar.gz"
-          curl --proto '=https' --tlsv1.2 -fsSL "$url" | tar -xz -C /usr/local/bin ferrocv
-          ferrocv --version
+      - uses: cacack/ferrocv/.github/actions/setup-ferrocv@v0.5.0
+        with:
+          version: v0.5.0
 
       - name: validate resume.json
         run: ferrocv validate resume.json
@@ -67,13 +60,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: install ferrocv
-        run: |
-          set -euo pipefail
-          target=x86_64-unknown-linux-gnu
-          url="https://github.com/cacack/ferrocv/releases/download/${FERROCV_VERSION}/ferrocv-${target}.tar.gz"
-          curl --proto '=https' --tlsv1.2 -fsSL "$url" | tar -xz -C /usr/local/bin ferrocv
-          ferrocv --version
+      - uses: cacack/ferrocv/.github/actions/setup-ferrocv@v0.5.0
+        with:
+          version: v0.5.0
 
       - name: render PDF
         run: ferrocv render resume.json --theme typst-jsonresume-cv --output dist/resume.pdf
