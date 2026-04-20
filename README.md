@@ -87,7 +87,6 @@ land, this template will grow the matching render steps.
 
 ## License
 
-This template is dual-licensed under either of
-[Apache-2.0](./LICENSE-APACHE) or [MIT](./LICENSE-MIT), matching the
-upstream `ferrocv` project. Your own `resume.json` content is yours —
-this license applies only to the template scaffolding.
+This template is dedicated to the public domain under
+[CC0 1.0 Universal](./LICENSE). Your own `resume.json` content is
+yours — this dedication applies only to the template scaffolding.
