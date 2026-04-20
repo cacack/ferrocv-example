@@ -73,6 +73,29 @@ ferrocv render resume.json --format text --output dist/resume.txt
 Run `ferrocv themes list` to see the themes shipped with your
 installed version.
 
+## AI prompt primer
+
+The `prompts/` directory ships three starter prompts for drafting,
+reviewing, and tailoring your `resume.json` with any AI assistant:
+
+- **`builder.md`** — schema-aware drafting: turn a brain-dump,
+  LinkedIn export, or rough bullets into valid JSON Resume fragments.
+- **`reviewer.md`** — content audit: flags weak verbs, missing
+  metrics, passive voice, buzzword stacking, and schema smells.
+- **`tailor.md`** — job-posting matcher: surfaces which existing
+  content to emphasize, de-emphasize, and honestly-missing gaps for a
+  specific role. Never invents experience.
+
+They're written as plain markdown so they travel across assistants
+(Claude, ChatGPT, Gemini, Copilot, Cursor, Aider, etc.) and between
+chat and coding UIs. Drop the file contents into a system prompt, a
+project instructions field, or a tool-specific wrapper
+(`.cursor/rules/`, `.github/copilot-instructions.md`, a Claude Code
+slash command, etc.) — whichever your workflow prefers.
+
+Treat them as a starting point, not a spec. Fork and evolve to fit
+your voice and the tools you actually use.
+
 ## Adding more themes or formats
 
 The seed workflow renders a PDF with `typst-jsonresume-cv`, plus HTML
