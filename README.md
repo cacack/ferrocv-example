@@ -8,12 +8,13 @@ A starter template for rendering your own resume with
 
 A minimal, forkable repo that takes a single `resume.json` file and
 renders it to PDF on every push via GitHub Actions, then publishes the
-output to GitHub Pages.
+result as a rolling `latest` GitHub Release.
 
 - **Input:** `resume.json` at the repo root ([JSON Resume
   v1.0.0](https://jsonresume.org/schema/)).
-- **Output:** two PDFs, one per bundled `ferrocv` theme, published to
-  GitHub Pages on every push to `main`.
+- **Output:** `resume.pdf` attached to a `latest` release that is
+  overwritten on every push to `main`. Keep the repo private and the
+  release (and its asset) stay private too.
 - **Runtime:** a pinned `ferrocv` binary downloaded from the upstream
   GitHub Release. No Rust toolchain, no Node, no TeX.
 
@@ -24,15 +25,28 @@ with your own.
 
 1. Click **"Use this template" → "Create a new repository"** at the top
    of [this repo on
-   GitHub](https://github.com/cacack/ferrocv-example).
-2. In your new repo, go to **Settings → Pages** and set **Source** to
-   **GitHub Actions**.
-3. Edit `resume.json` with your own content. The schema reference lives
+   GitHub](https://github.com/cacack/ferrocv-example). Keep it private
+   if you don't want your resume publicly browsable.
+2. Edit `resume.json` with your own content. The schema reference lives
    at <https://jsonresume.org/schema/>.
-4. Commit and push to `main`. The `build` workflow renders your resume
-   and deploys the result to GitHub Pages.
-5. Your rendered resume lives at
-   `https://<your-username>.github.io/<your-repo>/`.
+3. Commit and push to `main`. The `build` workflow validates your
+   resume, renders it, and updates the `latest` release.
+4. Grab your rendered PDF from the repo's **Releases → latest** page.
+   The download URL is stable; on a private repo you'll need to be
+   signed in to GitHub to fetch it.
+
+### Optional: publish to GitHub Pages
+
+Pages is **off by default**. Turning it on means your resume is served
+as a website — and on Free/Pro/Team plans, Pages from a private repo
+is still published to a **public** URL. Only GitHub Enterprise Cloud
+supports private-access Pages.
+
+If you still want it, run the workflow manually:
+**Actions → build → Run workflow**, set
+**Also deploy to GitHub Pages** to `true`. Site will appear at
+`https://<your-username>.github.io/<your-repo>/` after you set
+**Settings → Pages → Source** to **GitHub Actions**.
 
 ## Local preview
 
@@ -52,8 +66,10 @@ version.
 
 The seed workflow renders a single theme (`typst-jsonresume-cv`, the
 only theme in the pinned `ferrocv` v0.2.1 release). As newer `ferrocv`
-releases add themes, bump the pin and add a matching render step plus
-a link in `index.html`.
+releases add themes, bump the pin and add a matching render step —
+output filenames should follow the `resume.<format>` convention
+(`resume.pdf`, future `resume.html`, `resume.txt`, etc.) so they all
+land cleanly on the `latest` release.
 
 ## Bumping `ferrocv`
 
