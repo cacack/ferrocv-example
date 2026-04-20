@@ -1,22 +1,34 @@
 name: build
 
+# GitHub Pages visibility warning:
+# On Free plans, Pages cannot publish from a private repo at all.
+# On Pro/Team plans, Pages from a private repo publishes a PUBLIC site
+# (reachable at https://<user>.github.io/<repo>). Private-access Pages
+# requires GitHub Enterprise Cloud. The Pages deploy below is therefore
+# opt-in via the `publish_pages` workflow_dispatch input.
+
 on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      publish_pages:
+        description: "Also deploy to GitHub Pages (PUBLIC site on Pro/Team — see warning in workflow file)"
+        type: boolean
+        default: false
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 concurrency:
-  group: pages
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   render:
-    name: render resume
+    name: render and release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,26 +46,34 @@ jobs:
       - name: validate resume.json
         run: ferrocv validate resume.json
 
-      - name: render with typst-jsonresume-cv
-        run: ferrocv render resume.json --theme typst-jsonresume-cv --output dist/resume-typst-jsonresume-cv.pdf
+      - name: render PDF
+        run: ferrocv render resume.json --theme typst-jsonresume-cv --output dist/resume.pdf
+
+      - name: publish latest release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh release delete latest --yes --cleanup-tag --repo "$GITHUB_REPOSITORY" || true
+          gh release create latest dist/resume.* \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "latest" \
+            --notes "Rendered from ${GITHUB_SHA}" \
+            --latest
 
       - name: stage pages content
+        if: ${{ inputs.publish_pages == true }}
         run: cp index.html dist/index.html
 
-      - name: upload workflow artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: resume-pdfs
-          path: dist/*.pdf
-          if-no-files-found: error
-
       - name: upload pages artifact
+        if: ${{ inputs.publish_pages == true }}
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
   deploy:
     name: deploy to pages
+    if: ${{ inputs.publish_pages == true }}
     needs: render
     runs-on: ubuntu-latest
     environment:
