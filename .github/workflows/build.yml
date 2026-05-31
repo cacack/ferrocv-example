@@ -40,7 +40,7 @@ jobs:
 
       - uses: cacack/ferrocv/.github/actions/setup-ferrocv@0ce96c0d25be63f141b406c5ac48d6efb2b2a17f # v0.6.0
         with:
-          version: v0.5.0
+          version: v0.6.0
 
       - name: validate resume.json
         run: ferrocv validate resume.json
@@ -62,7 +62,7 @@ jobs:
 
       - uses: cacack/ferrocv/.github/actions/setup-ferrocv@0ce96c0d25be63f141b406c5ac48d6efb2b2a17f # v0.6.0
         with:
-          version: v0.5.0
+          version: v0.6.0
 
       - name: render PDF
         run: ferrocv render resume.json --theme typst-jsonresume-cv --output dist/resume.pdf
