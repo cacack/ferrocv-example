@@ -33,12 +33,12 @@ jobs:
     name: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: check spelling
-        uses: crate-ci/typos@aca895bf05aec0cb7dffa6f94495e923224d9f17 # v1.46.2
+        uses: crate-ci/typos@37bb98842b0d8c4ffebdb75301a13db0267cef89 # v1.47.2
 
-      - uses: cacack/ferrocv/.github/actions/setup-ferrocv@0ce96c0d25be63f141b406c5ac48d6efb2b2a17f # v0.6.0
+      - uses: cacack/ferrocv/.github/actions/setup-ferrocv@a1f44a4e765719acd43d497e8370fe3111ad7a5e # v0.7.0
         with:
           version: v0.6.0
 
@@ -58,9 +58,9 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
-      - uses: cacack/ferrocv/.github/actions/setup-ferrocv@0ce96c0d25be63f141b406c5ac48d6efb2b2a17f # v0.6.0
+      - uses: cacack/ferrocv/.github/actions/setup-ferrocv@a1f44a4e765719acd43d497e8370fe3111ad7a5e # v0.7.0
         with:
           version: v0.6.0
 
