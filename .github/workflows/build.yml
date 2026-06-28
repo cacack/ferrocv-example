@@ -65,7 +65,7 @@ jobs:
           version: v0.9.0
 
       - name: render PDF
-        run: ferrocv render resume.json --theme typst-jsonresume-cv --output dist/resume.pdf
+        run: ferrocv render resume.json --theme classic --output dist/resume.pdf
 
       - name: render HTML
         run: ferrocv render resume.json --format html --output dist/resume.html

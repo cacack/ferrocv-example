@@ -65,7 +65,7 @@ Install `ferrocv` (see the
 
 ```sh
 ferrocv validate resume.json
-ferrocv render resume.json --theme typst-jsonresume-cv --output dist/resume.pdf
+ferrocv render resume.json --theme classic --output dist/resume.pdf
 ferrocv render resume.json --format html --output dist/resume.html
 ferrocv render resume.json --format text --output dist/resume.txt
 ```
@@ -98,10 +98,11 @@ your voice and the tools you actually use.
 
 ## Adding more themes or formats
 
-The seed workflow renders a PDF with `typst-jsonresume-cv`, plus HTML
-and plain text via the default `text-minimal` theme. Other PDF themes
-(`modern-cv`, `fantastic-cv`) ship with `ferrocv` v0.5.0 — swap the
-`--theme` value or add extra render steps. Output filenames should
+The seed workflow renders a PDF with `classic` (ferrocv's built-in
+default theme), plus HTML and plain text via the default `text-minimal`
+theme. Other PDF themes (`typst-jsonresume-cv`, `modern-cv`,
+`fantastic-cv`) ship with `ferrocv` — swap the `--theme` value or add
+extra render steps. Output filenames should
 follow the `resume.<format>` convention (`resume.pdf`, `resume.html`,
 `resume.txt`) so they all land cleanly on the `latest` release.
 
