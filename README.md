@@ -109,10 +109,17 @@ follow the `resume.<format>` convention (`resume.pdf`, `resume.html`,
 ## Bumping `ferrocv`
 
 `ferrocv` is installed via the `cacack/ferrocv/.github/actions/setup-ferrocv`
-composite action. To update, bump both the `@v0.5.0` ref and the
-matching `version:` input in `.github/workflows/build.yml` (four
-places total — two jobs × two lines each) to a newer tag from the
-[ferrocv releases page](https://github.com/cacack/ferrocv/releases).
+composite action, pinned to a commit SHA. To update, pick a newer tag
+from the [ferrocv releases page](https://github.com/cacack/ferrocv/releases)
+and edit `.github/workflows/build.yml` in four places total (two jobs ×
+two lines each):
+
+- the action's pinned SHA (the `@<sha>` ref, with the `# vX.Y.Z`
+  comment updated to match the new tag), and
+- the matching `version:` input.
+
+Resolve the SHA for a tag with
+`gh api repos/cacack/ferrocv/git/refs/tags/<tag>`.
 
 ## Suppressing false positives
 
