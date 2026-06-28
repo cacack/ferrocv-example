@@ -38,9 +38,9 @@ jobs:
       - name: check spelling
         uses: crate-ci/typos@aca895bf05aec0cb7dffa6f94495e923224d9f17 # v1.46.2
 
-      - uses: cacack/ferrocv/.github/actions/setup-ferrocv@0ce96c0d25be63f141b406c5ac48d6efb2b2a17f # v0.6.0
+      - uses: cacack/ferrocv/.github/actions/setup-ferrocv@4686bf4621c7149606ead806a5d13155169bc582 # v0.9.0
         with:
-          version: v0.6.0
+          version: v0.9.0
 
       - name: validate resume.json
         run: ferrocv validate resume.json
@@ -60,12 +60,12 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - uses: cacack/ferrocv/.github/actions/setup-ferrocv@0ce96c0d25be63f141b406c5ac48d6efb2b2a17f # v0.6.0
+      - uses: cacack/ferrocv/.github/actions/setup-ferrocv@4686bf4621c7149606ead806a5d13155169bc582 # v0.9.0
         with:
-          version: v0.6.0
+          version: v0.9.0
 
       - name: render PDF
-        run: ferrocv render resume.json --theme typst-jsonresume-cv --output dist/resume.pdf
+        run: ferrocv render resume.json --theme classic --output dist/resume.pdf
 
       - name: render HTML
         run: ferrocv render resume.json --format html --output dist/resume.html

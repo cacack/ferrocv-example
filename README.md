@@ -65,7 +65,7 @@ Install `ferrocv` (see the
 
 ```sh
 ferrocv validate resume.json
-ferrocv render resume.json --theme typst-jsonresume-cv --output dist/resume.pdf
+ferrocv render resume.json --theme classic --output dist/resume.pdf
 ferrocv render resume.json --format html --output dist/resume.html
 ferrocv render resume.json --format text --output dist/resume.txt
 ```
@@ -98,20 +98,28 @@ your voice and the tools you actually use.
 
 ## Adding more themes or formats
 
-The seed workflow renders a PDF with `typst-jsonresume-cv`, plus HTML
-and plain text via the default `text-minimal` theme. Other PDF themes
-(`modern-cv`, `fantastic-cv`) ship with `ferrocv` v0.5.0 — swap the
-`--theme` value or add extra render steps. Output filenames should
+The seed workflow renders a PDF with `classic` (ferrocv's built-in
+default theme), plus HTML and plain text via the default `text-minimal`
+theme. Other PDF themes (`typst-jsonresume-cv`, `modern-cv`,
+`fantastic-cv`) ship with `ferrocv` — swap the `--theme` value or add
+extra render steps. Output filenames should
 follow the `resume.<format>` convention (`resume.pdf`, `resume.html`,
 `resume.txt`) so they all land cleanly on the `latest` release.
 
 ## Bumping `ferrocv`
 
 `ferrocv` is installed via the `cacack/ferrocv/.github/actions/setup-ferrocv`
-composite action. To update, bump both the `@v0.5.0` ref and the
-matching `version:` input in `.github/workflows/build.yml` (four
-places total — two jobs × two lines each) to a newer tag from the
-[ferrocv releases page](https://github.com/cacack/ferrocv/releases).
+composite action, pinned to a commit SHA. To update, pick a newer tag
+from the [ferrocv releases page](https://github.com/cacack/ferrocv/releases)
+and edit `.github/workflows/build.yml` in four places total (two jobs ×
+two lines each):
+
+- the action's pinned SHA (the `@<sha>` ref, with the `# vX.Y.Z`
+  comment updated to match the new tag), and
+- the matching `version:` input.
+
+Resolve the SHA for a tag with
+`gh api repos/cacack/ferrocv/git/refs/tags/<tag>`.
 
 ## Suppressing false positives
 
