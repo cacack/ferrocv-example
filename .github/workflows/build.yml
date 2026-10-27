@@ -33,12 +33,12 @@ jobs:
     name: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: check spelling
-        uses: crate-ci/typos@bee27e3a4fd1ea2111cf90ab89cd076c870fce14 # v1.48.0
+        uses: crate-ci/typos@7f9d0819ca1c008ade73f4b41fa9d258d48f605b # v1.51.1
 
-      - uses: cacack/ferrocv/.github/actions/setup-ferrocv@4686bf4621c7149606ead806a5d13155169bc582 # v0.9.0
+      - uses: cacack/ferrocv/.github/actions/setup-ferrocv@bcf14b6e0966c78c58d5dc718f528d31a5e3be29 # v0.11.0
         with:
           version: v0.9.0
 
@@ -58,9 +58,9 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: cacack/ferrocv/.github/actions/setup-ferrocv@4686bf4621c7149606ead806a5d13155169bc582 # v0.9.0
+      - uses: cacack/ferrocv/.github/actions/setup-ferrocv@bcf14b6e0966c78c58d5dc718f528d31a5e3be29 # v0.11.0
         with:
           version: v0.9.0
 
@@ -74,7 +74,7 @@ jobs:
         run: ferrocv render resume.json --format text --output dist/resume.txt
 
       - name: upload rendered preview
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: resume-${{ github.sha }}
           path: dist/resume.*
@@ -113,4 +113,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
