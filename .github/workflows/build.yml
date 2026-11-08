@@ -36,7 +36,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: check spelling
-        uses: crate-ci/typos@7f9d0819ca1c008ade73f4b41fa9d258d48f605b # v1.51.1
+        uses: crate-ci/typos@4c8b7f51ca60df14e3c5ca82770dfbbe6c3dae85 # v1.52.0
 
       - uses: cacack/ferrocv/.github/actions/setup-ferrocv@bcf14b6e0966c78c58d5dc718f528d31a5e3be29 # v0.11.0
         with:
